@@ -1,0 +1,11 @@
+{
+  "id": "1",
+  "type": "buy",
+  "user": {
+    "id": 1,
+    "name": "Jon"
+  },
+  "symbol": "AMD",
+  "shares": 50,
+  "price": 11.32
+}
