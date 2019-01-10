@@ -59,6 +59,7 @@ module.exports = app => {
       id: 1
     });
 
+    // If user does not exist, then return 404 response
     if (trades.length === 0) {
       res.status(404).send({ message: "Requested user does not exist" });
       return;
