@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const keys = require("./config/keys");
 
-require("./models/User");
 require("./models/Trade");
 
 mongoose.connect(keys.mongoURI);
