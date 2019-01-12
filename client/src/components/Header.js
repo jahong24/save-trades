@@ -1,12 +1,21 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-export default class Header extends Component {
+class Header extends Component {
+  state = {
+    term: ""
+  };
+
+  onInputChange = term => {
+    this.setState({ term });
+  };
+
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="#">
+        <Link className="navbar-brand" to="/">
           Stocks App
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -20,11 +29,6 @@ export default class Header extends Component {
         </button>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                GET All Trades
-              </a>
-            </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
                 POST A New Trade
@@ -42,16 +46,22 @@ export default class Header extends Component {
               type="search"
               placeholder="Search Trade By Id"
               aria-label="Search"
+              value={this.state.term}
+              onChange={event => this.onInputChange(event.target.value)}
             />
-            <button
+
+            <Link
               className="btn btn-outline-success my-2 my-sm-0"
-              type="submit"
+              onClick={this.forceUpdate}
+              to={`/${this.state.term}`}
             >
               Search
-            </button>
+            </Link>
           </form>
         </div>
       </nav>
     );
   }
 }
+
+export default Header;
