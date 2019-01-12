@@ -4,12 +4,17 @@ import * as actions from "../actions";
 import _ from "lodash";
 
 class ShowTradesId extends Component {
+  componentWillReceiveProps(newProps) {
+    if (this.props.match.params.userId != newProps.match.params.userId) {
+      this.props.fetchTradesId(newProps.match.params.userId);
+    }
+  }
+
   componentDidMount() {
     this.props.fetchTradesId(this.props.match.params.userId);
   }
 
   renderTrades(trades) {
-    /*
     if (trades.length == 0) {
       return (
         <div className="text-center pt-5 text-danger">
@@ -17,7 +22,7 @@ class ShowTradesId extends Component {
         </div>
       );
     }
-    */
+
     return _.map(this.props.tradesById, trade => {
       return (
         <li key={trade.id}>
@@ -29,7 +34,8 @@ class ShowTradesId extends Component {
             <h6 className="card-subtitle mb-2 ">Price: {trade.price}</h6>
             <h6 className="card-subtitle mb-2 ">Shares: {trade.shares}</h6>
             <p className="card-text text-muted">
-              Type: {trade.type} <br /> Name: {trade.user.name}
+              Type: {trade.type} <br /> Name: {trade.user.name} <br /> UserId:{" "}
+              {trade.user.id}
             </p>
           </div>
         </li>

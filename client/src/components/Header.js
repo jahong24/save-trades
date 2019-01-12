@@ -10,10 +10,14 @@ class Header extends Component {
     this.setState({ term });
   };
 
+  clearSearchTerm = () => {
+    this.setState({ term: "" });
+  };
+
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/" onClick={this.clearSearchTerm}>
           Stocks App
         </Link>
         <button
@@ -52,7 +56,6 @@ class Header extends Component {
 
             <Link
               className="btn btn-outline-success my-2 my-sm-0"
-              onClick={this.forceUpdate}
               to={`/${this.state.term}`}
             >
               Search
