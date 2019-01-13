@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import _ from "lodash";
+import TradeCard from "./TradeCard";
 
 class ShowTradesId extends Component {
   componentWillReceiveProps(newProps) {
-    if (this.props.match.params.userId != newProps.match.params.userId) {
+    if (this.props.match.params.userId !== newProps.match.params.userId) {
       this.props.fetchTradesId(newProps.match.params.userId);
     }
   }
@@ -15,7 +16,7 @@ class ShowTradesId extends Component {
   }
 
   renderTrades(trades) {
-    if (trades.length == 0) {
+    if (trades.length === 0) {
       return (
         <div className="text-center pt-5 text-danger">
           <h2>No trades found for this Id</h2>
@@ -26,18 +27,7 @@ class ShowTradesId extends Component {
     return _.map(this.props.tradesById, trade => {
       return (
         <li key={trade.id}>
-          <div className="card" style={{ width: "50em" }}>
-            <h4 className="card-title">Id: {trade.id}</h4>
-            <h6 className="card-subtitle mb-2 text-success">
-              Symbol: {trade.symbol}
-            </h6>
-            <h6 className="card-subtitle mb-2 ">Price: {trade.price}</h6>
-            <h6 className="card-subtitle mb-2 ">Shares: {trade.shares}</h6>
-            <p className="card-text text-muted">
-              Type: {trade.type} <br /> Name: {trade.user.name} <br /> UserId:{" "}
-              {trade.user.id}
-            </p>
-          </div>
+          <TradeCard trades={trade} />
         </li>
       );
     });

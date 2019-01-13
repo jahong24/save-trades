@@ -48,7 +48,7 @@ class Header extends Component {
             <input
               className="form-control mr-sm-2"
               type="search"
-              placeholder="Search Trade By Id"
+              placeholder="Search By UserId"
               aria-label="Search"
               value={this.state.term}
               onChange={event => this.onInputChange(event.target.value)}

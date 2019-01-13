@@ -14,5 +14,5 @@ app.use(bodyParser.json());
 require("./routes/tradeRoutes")(app);
 //require("./routes/stockRoutes")(app);
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT);
