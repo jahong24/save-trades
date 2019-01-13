@@ -4,14 +4,14 @@ const Trade = mongoose.model("trades");
 
 module.exports = app => {
   // Erasing all the trades
-  app.get("/erase", async (req, res) => {
+  app.get("/api/erase", async (req, res) => {
     await Trade.deleteMany();
     res.status(200).send({ message: "Erase all trades" });
     return;
   });
 
   // Adding new trades
-  app.post("/trades", async (req, res) => {
+  app.post("/api/trades", async (req, res) => {
     const { id, type, user, symbol, shares, price } = req.body;
 
     // Check if trade exists for given id
@@ -44,7 +44,7 @@ module.exports = app => {
   });
 
   // Return all trades sorted in ascending order by id
-  app.get("/trades", async (req, res) => {
+  app.get("/api/trades", async (req, res) => {
     const trades = await Trade.find().sort({ id: 1 });
 
     res.status(200).send(trades);
@@ -52,7 +52,7 @@ module.exports = app => {
   });
 
   // Return the trades filtered by the user ID, sorted in ascending order by id
-  app.get("/trades/users/:userId", async (req, res) => {
+  app.get("/api/trades/users/:userId", async (req, res) => {
     const trades = await Trade.find({
       "user.id": parseInt(req.params.userId)
     }).sort({
