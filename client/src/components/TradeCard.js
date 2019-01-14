@@ -6,7 +6,7 @@ const TradeCard = props => {
   return (
     <div className="card" style={{ width: "25rem" }}>
       <div className="card-header">
-        <h4 className="card-title">Id: {props.id}</h4>
+        <h4 className="card-title">Id: {props.trades.id}</h4>
         <h5 className="card-subtitle mb-2 text-success">
           Symbol: {props.trades.symbol}
         </h5>

@@ -10,6 +10,14 @@ class ShowTrades extends Component {
   }
 
   renderTrades(trades) {
+    if (trades.length === 0) {
+      return (
+        <div className="text-center pt-5 text-danger">
+          <h2>No saved trade orders</h2>
+        </div>
+      );
+    }
+
     return _.map(this.props.trades, trade => {
       return (
         <li key={trade.id}>
