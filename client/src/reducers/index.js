@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { reducer as reduxForm } from "redux-form";
 import { FETCH_TRADES, FETCH_TRADES_ID, FETCH_ERROR } from "../actions/types";
 
 const tradesReducer = (state = [], action) => {
@@ -25,5 +26,6 @@ const tradesIdReducer = (state = [], action) => {
 
 export default combineReducers({
   trades: tradesReducer,
-  tradesById: tradesIdReducer
+  tradesById: tradesIdReducer,
+  form: reduxForm
 });

@@ -4,19 +4,19 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Header from "./Header";
 import ShowTrades from "./ShowTrades";
 import ShowTradesId from "./ShowTradesId";
+import TradeForm from "./Trades/TradeForm";
 
 class App extends Component {
   render() {
     return (
-      <div className="container">
-        <BrowserRouter>
-          <div>
-            <Header />
-            <Route exact path="/:userId" component={ShowTradesId} />
-            <Route exact path="/" component={ShowTrades} />
-          </div>
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <div className="container">
+          <Header />
+          <Route exact path="/" component={ShowTrades} />
+          <Route exact path="/:userId" component={ShowTradesId} />
+          <Route exact path="/trades/new" component={TradeForm} />
+        </div>
+      </BrowserRouter>
     );
   }
 }

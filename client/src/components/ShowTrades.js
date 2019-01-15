@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import _ from "lodash";
 import TradeCard from "./TradeCard";
+import { Link } from "react-router-dom";
 
 class ShowTrades extends Component {
   componentDidMount() {
@@ -10,14 +11,6 @@ class ShowTrades extends Component {
   }
 
   renderTrades(trades) {
-    if (trades.length === 0) {
-      return (
-        <div className="text-center pt-5 text-danger">
-          <h2>No saved trade orders</h2>
-        </div>
-      );
-    }
-
     return _.map(this.props.trades, trade => {
       return (
         <li key={trade.id}>
@@ -30,11 +23,27 @@ class ShowTrades extends Component {
   render() {
     return (
       <div>
-        <ul
-          style={{ listStyleType: "none", display: "table", margin: "0 auto" }}
-        >
-          {this.renderTrades(this.props.trades)}
-        </ul>
+        <div>
+          <ul
+            style={{
+              listStyleType: "none",
+              display: "table",
+              margin: "0 auto"
+            }}
+          >
+            {this.renderTrades(this.props.trades)}
+          </ul>
+        </div>
+        <div style={{ position: "fixed", bottom: "20px" }}>
+          <Link to="/trades/new">
+            <i
+              className="material-icons"
+              style={{ fontSize: "60px", color: "#FB8C00" }}
+            >
+              add_box
+            </i>
+          </Link>
+        </div>
       </div>
     );
   }

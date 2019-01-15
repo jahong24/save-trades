@@ -18,3 +18,20 @@ export const fetchTradesId = userId => async dispatch => {
     dispatch({ type: FETCH_ERROR });
   }
 };
+
+export const submitTrade = (values, history) => async dispatch => {
+  const req = {
+    id: values.values.tradeId,
+    type: values.values.type,
+    user: {
+      id: parseInt(values.values.userId),
+      name: values.values.userName
+    },
+    symbol: values.values.symbol,
+    shares: values.values.shares,
+    price: values.values.price
+  };
+  const res = await axios.post("/api/trades", req);
+  history.push("/");
+  return {};
+};
