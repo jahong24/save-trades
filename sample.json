@@ -1,11 +1,7 @@
 {
   "id": "1",
-  "type": "buy",
-  "user": {
-    "id": 1,
-    "name": "Jon"
-  },
+  "action": "Buy",
+  "quantity": 50,
   "symbol": "AMD",
-  "shares": 50,
   "price": 11.32
 }

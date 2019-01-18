@@ -13,7 +13,7 @@ class App extends Component {
         <div className="container">
           <Header />
           <Route exact path="/" component={ShowTrades} />
-          <Route exact path="/:userId" component={ShowTradesId} />
+          <Route exact path="/:symbol" component={ShowTradesId} />
           <Route exact path="/trades/new" component={TradeForm} />
         </div>
       </BrowserRouter>

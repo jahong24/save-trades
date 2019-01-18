@@ -12,25 +12,18 @@ module.exports = app => {
 
   // Adding new trades
   app.post("/api/trades", async (req, res) => {
-    const { id, type, user, symbol, shares, price } = req.body;
+    const { action, quantity, symbol, price } = req.body;
 
-    // Check if trade exists for given id
-    const tradeCount = await Trade.countDocuments({ id });
-
-    // If trade exists, then return 400 response
-    if (tradeCount === 1) {
-      res.status(400).send({ message: "Trade with same id already exists" });
-      return;
-    }
+    // Total number of trades, id will be incremented everytime a trade is saved
+    const totalTrades = await Trade.countDocuments();
 
     const trade = new Trade({
-      id,
-      type,
-      user,
-      symbol,
-      shares,
-      price,
-      timestamp: Date.now()
+      id: parseInt(totalTrades) + 1,
+      action,
+      quantity,
+      symbol: symbol.toUpperCase(),
+      price: parseFloat(price).toFixed(2),
+      created: new Date().toLocaleString()
     });
 
     try {
@@ -51,17 +44,17 @@ module.exports = app => {
     return;
   });
 
-  // Return the trades filtered by the user ID, sorted in ascending order by id
-  app.get("/api/trades/users/:userId", async (req, res) => {
+  // Return the trades filtered by the symbol, sorted in ascending order by id
+  app.get("/api/trades/:symbol", async (req, res) => {
     const trades = await Trade.find({
-      "user.id": parseInt(req.params.userId)
+      symbol: req.params.symbol.toUpperCase()
     }).sort({
       id: 1
     });
 
-    // If user does not exist, then return 404 response
+    // If trade does not exist for symbol, then return 404 response
     if (trades.length === 0) {
-      res.status(404).send({ message: "Requested user does not exist" });
+      res.status(404).send({ message: "Requested symbol does not exist" });
       return;
     }
 

@@ -6,13 +6,13 @@ import TradeCard from "./TradeCard";
 
 class ShowTradesId extends Component {
   componentWillReceiveProps(newProps) {
-    if (this.props.match.params.userId !== newProps.match.params.userId) {
-      this.props.fetchTradesId(newProps.match.params.userId);
+    if (this.props.match.params.symbol !== newProps.match.params.symbol) {
+      this.props.fetchTradesId(newProps.match.params.symbol);
     }
   }
 
   componentDidMount() {
-    this.props.fetchTradesId(this.props.match.params.userId);
+    this.props.fetchTradesId(this.props.match.params.symbol);
   }
 
   renderTrades(trades) {

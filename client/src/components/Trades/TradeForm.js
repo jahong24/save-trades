@@ -1,72 +1,74 @@
-import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { reduxForm, Field } from "redux-form";
-import { Link } from "react-router-dom";
+import { Field, reduxForm } from "redux-form";
+import { withRouter, Link } from "react-router-dom";
 import TradeField from "./TradeField";
-import formFields from "./formFields";
-import { withRouter } from "react-router-dom";
 import * as actions from "../../actions";
 
 class TradeForm extends Component {
-  renderFields() {
-    return _.map(formFields, ({ label, name, type }) => {
-      return (
-        <Field
-          key={name}
-          component={TradeField}
-          type={type}
-          label={label}
-          name={name}
-        />
-      );
-    });
-  }
-
   render() {
     return (
       <div>
         <h1 className="text-center">Save Order</h1>
-        <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
-          {this.renderFields()}
+        <form
+          onSubmit={this.props.handleSubmit(() =>
+            this.props.submitTrade(this.props.formValues, this.props.history)
+          )}
+        >
           <div className="form-group">
-            <label>Type</label>
+            <label>Action</label>
             <div>
-              <Field className="form-control" name="type" component="select">
-                <option />
-                <option value="buy">Buy</option>
-                <option value="sell">Sell</option>
+              <Field className="form-control" name="action" component="select">
+                <option value="Buy">Buy</option>
+                <option value="Sell">Sell</option>
               </Field>
             </div>
+            <div className="text-danger" style={{ marginBottom: "20px" }}>
+              {this.props.error}
+            </div>
           </div>
-          <Link to="/" className="btn btn-danger btn-lg">
+          <Field
+            name="quantity"
+            type="number"
+            component={TradeField}
+            label="Quantity"
+          />
+          <Field
+            name="symbol"
+            type="text"
+            component={TradeField}
+            label="Symbol"
+          />
+          <Field
+            name="price"
+            type="number"
+            component={TradeField}
+            label="Price"
+          />
+          <Link to="/" className="btn btn-secondary btn-lg">
             Cancel
           </Link>
-          <button
-            onClick={() =>
-              this.props.submitTrade(this.props.formValues, this.props.history)
-            }
-            className="btn btn-primary btn-lg float-right"
-          >
-            Next
-          </button>
+          <button className="btn btn-success btn-lg float-right">Save</button>
         </form>
       </div>
     );
   }
 }
 
-function validate(values) {
+const validate = values => {
   const errors = {};
 
-  _.each(formFields, ({ name }) => {
-    if (!values[name]) {
-      errors[name] = "Field Required";
-    }
-  });
-
+  if (!values.quantity) {
+    errors.quantity = "Required";
+  }
+  if (!values.symbol) {
+    errors.symbol = "Requried";
+  }
+  if (!values.price) {
+    errors.price = "Required";
+  }
   return errors;
-}
+};
 
 function mapStateToProps(state) {
   return { formValues: state.form.tradeForm };

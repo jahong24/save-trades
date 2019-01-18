@@ -12,7 +12,6 @@ const app = express();
 app.use(bodyParser.json());
 
 require("./routes/tradeRoutes")(app);
-//require("./routes/stockRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   // Express will serve up production assets like main.js or main.css file
