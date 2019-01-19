@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const tradeSchema = new Schema({
-  id: Number, // The unique ID of the trade
   action: String, // Trade type, buy or sell
   quantity: Number, // Total number of shares traded
   symbol: String, // The stock symbol

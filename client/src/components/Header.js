@@ -35,7 +35,7 @@ class Header extends Component {
           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             <li className="nav-item">
               <a className="nav-link" href="#">
-                DELETE All Trades
+                About
               </a>
             </li>
           </ul>

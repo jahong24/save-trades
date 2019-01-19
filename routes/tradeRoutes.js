@@ -10,15 +10,24 @@ module.exports = app => {
     return;
   });
 
+  // Erase a trade given // IDEA:
+  app.get("/api/erase/:id", async (req, res) => {
+    console.log(req.params.id);
+    try {
+      await Trade.deleteOne({ _id: req.params.id });
+      res.status(200).send({ message: "Saved order erased" });
+      return;
+    } catch (err) {
+      res.status(404).send({ message: "Requested trade does not exist" });
+      return;
+    }
+  });
+
   // Adding new trades
   app.post("/api/trades", async (req, res) => {
     const { action, quantity, symbol, price } = req.body;
 
-    // Total number of trades, id will be incremented everytime a trade is saved
-    const totalTrades = await Trade.countDocuments();
-
     const trade = new Trade({
-      id: parseInt(totalTrades) + 1,
       action,
       quantity,
       symbol: symbol.toUpperCase(),
@@ -38,7 +47,7 @@ module.exports = app => {
 
   // Return all trades sorted in ascending order by id
   app.get("/api/trades", async (req, res) => {
-    const trades = await Trade.find().sort({ id: 1 });
+    const trades = await Trade.find().sort({ created: 1 });
 
     res.status(200).send(trades);
     return;
@@ -49,7 +58,7 @@ module.exports = app => {
     const trades = await Trade.find({
       symbol: req.params.symbol.toUpperCase()
     }).sort({
-      id: 1
+      created: 1
     });
 
     // If trade does not exist for symbol, then return 404 response

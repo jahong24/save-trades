@@ -26,7 +26,7 @@ class ShowTradesId extends Component {
 
     return _.map(this.props.tradesById, trade => {
       return (
-        <li key={trade.id}>
+        <li key={trade._id} className="list-group-item">
           <TradeCard trades={trade} />
         </li>
       );
@@ -36,9 +36,7 @@ class ShowTradesId extends Component {
   render() {
     return (
       <div>
-        <ul
-          style={{ listStyleType: "none", display: "table", margin: "0 auto" }}
-        >
+        <ul className="list-group list-group-flush mx-auto">
           {this.renderTrades(this.props.tradesById)}
         </ul>
       </div>

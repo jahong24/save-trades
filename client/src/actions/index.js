@@ -27,7 +27,13 @@ export const submitTrade = (values, history) => async dispatch => {
     symbol,
     price
   };
-  const res = await axios.post("/api/trades", req);
+  await axios.post("/api/trades", req);
   history.push("/");
   return {};
+};
+
+export const deleteTrade = id => async dispatch => {
+  await axios.get(`/api/erase/${id}`);
+  const res = await axios.get("/api/trades");
+  dispatch({ type: FETCH_TRADES, payload: res.data });
 };

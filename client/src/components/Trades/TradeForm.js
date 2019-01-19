@@ -5,6 +5,10 @@ import { withRouter, Link } from "react-router-dom";
 import TradeField from "./TradeField";
 import * as actions from "../../actions";
 
+const initialValues = {
+  action: "Buy"
+};
+
 class TradeForm extends Component {
   render() {
     return (
@@ -22,9 +26,6 @@ class TradeForm extends Component {
                 <option value="Buy">Buy</option>
                 <option value="Sell">Sell</option>
               </Field>
-            </div>
-            <div className="text-danger" style={{ marginBottom: "20px" }}>
-              {this.props.error}
             </div>
           </div>
           <Field
@@ -81,5 +82,6 @@ TradeForm = connect(
 
 export default reduxForm({
   validate,
-  form: "tradeForm"
+  form: "tradeForm",
+  initialValues
 })(TradeForm);
