@@ -32,14 +32,8 @@ class Header extends Component {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                About
-              </a>
-            </li>
-          </ul>
-          <form className="form-inline my-2 my-lg-0">
+          <ul className="mr-auto" />
+          <form className="form-inline">
             <input
               className="form-control mr-sm-2"
               type="search"
@@ -48,7 +42,6 @@ class Header extends Component {
               value={this.state.term}
               onChange={event => this.onInputChange(event.target.value)}
             />
-
             <Link
               className="btn btn-outline-success my-2 my-sm-0"
               to={`/${this.state.term}`}

@@ -10,9 +10,8 @@ module.exports = app => {
     return;
   });
 
-  // Erase a trade given // IDEA:
+  // Erase a trade given _id
   app.get("/api/erase/:id", async (req, res) => {
-    console.log(req.params.id);
     try {
       await Trade.deleteOne({ _id: req.params.id });
       res.status(200).send({ message: "Saved order erased" });
@@ -45,15 +44,14 @@ module.exports = app => {
     }
   });
 
-  // Return all trades sorted in ascending order by id
+  // Return all trades sorted in ascending order by created timestamp
   app.get("/api/trades", async (req, res) => {
     const trades = await Trade.find().sort({ created: 1 });
-
     res.status(200).send(trades);
     return;
   });
 
-  // Return the trades filtered by the symbol, sorted in ascending order by id
+  // Return the trades filtered by the symbol, sorted in ascending order by created timestamp
   app.get("/api/trades/:symbol", async (req, res) => {
     const trades = await Trade.find({
       symbol: req.params.symbol.toUpperCase()

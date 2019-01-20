@@ -12,7 +12,6 @@ class ShowTrades extends Component {
 
   renderTrades(trades) {
     return _.map(this.props.trades, trade => {
-      console.log(trade);
       return (
         <li key={trade._id} className="list-group-item">
           <TradeCard trades={trade} />

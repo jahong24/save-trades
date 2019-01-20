@@ -7,7 +7,6 @@ const QUOTE_URL = "https://finance.yahoo.com/quote/";
 class TradeCard extends Component {
   render() {
     const { _id, symbol, action, quantity, price, created } = this.props.trades;
-    console.log(this.props);
     return (
       <div className="card">
         <div className="card-header float-left">
