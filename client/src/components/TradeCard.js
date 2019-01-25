@@ -32,7 +32,7 @@ class TradeCard extends Component {
           <button
             className="btn btn-secondary float-right"
             onClick={() => this.props.deleteTrade(_id)}
-            disabled={this.props.showDelete}
+            style={{ display: this.props.showDelete }}
           >
             Delete
           </button>
