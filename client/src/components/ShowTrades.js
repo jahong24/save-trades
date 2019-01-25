@@ -14,7 +14,7 @@ class ShowTrades extends Component {
     return _.map(this.props.trades, trade => {
       return (
         <div>
-          <TradeCard trades={trade} />
+          <TradeCard trades={trade} showDelete={false} />
         </div>
       );
     });
