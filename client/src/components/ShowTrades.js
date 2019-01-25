@@ -13,9 +13,9 @@ class ShowTrades extends Component {
   renderTrades(trades) {
     return _.map(this.props.trades, trade => {
       return (
-        <li key={trade._id} className="list-group-item">
+        <div>
           <TradeCard trades={trade} />
-        </li>
+        </div>
       );
     });
   }
@@ -23,11 +23,7 @@ class ShowTrades extends Component {
   render() {
     return (
       <div>
-        <div>
-          <ul className="list-group list-group-flush mx-auto">
-            {this.renderTrades(this.props.trades)}
-          </ul>
-        </div>
+        <div className="card-deck">{this.renderTrades(this.props.trades)}</div>
         <div className="float-right">
           <Link to="/trades/new">
             <i

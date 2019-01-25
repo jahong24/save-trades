@@ -20,12 +20,12 @@ class TradeCard extends Component {
         <div className="card-body">
           <h6 className="card-subtitle mb-2">Quantity: {quantity}</h6>
           <h6 className="card-subtitle mb-2">Price: {price}</h6>
-          <p className="card-text text-muted">Created: {created}</p>
+          <p className="card-text text-muted">{created}</p>
           <a
             target="_blank"
             rel="noopener noreferrer"
             href={`${QUOTE_URL}${symbol}`}
-            className="btn btn-success"
+            className="btn btn-success mr-3"
           >
             Check Quote
           </a>
